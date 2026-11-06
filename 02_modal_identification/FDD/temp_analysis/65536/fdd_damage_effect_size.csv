@@ -1,0 +1,11 @@
+feature,temp_bin,n_healthy,n_damaged,effect_size
+"B1 (modes 1-2, merged, not yet separable)",0-10,14,15,0.8637937008449986
+"B1 (modes 1-2, merged, not yet separable)",10-20,13,9,0.31290780299882964
+"B1 (modes 1-2, merged, not yet separable)",20-30,2,2,0.6030226891555437
+"T1 (mode 3, torsional)",10-20,13,2,2.850710706714154
+"B2-y (modes 4-5, y direction)",0-10,14,11,0.7392939281767112
+"B2-y (modes 4-5, y direction)",10-20,13,9,0.8607033829722535
+"B2-y (modes 4-5, y direction)",20-30,2,2,0.9313806308475693
+"B2-x (modes 4-5, x direction)",0-10,14,11,0.8197650112306787
+"B2-x (modes 4-5, x direction)",10-20,13,8,0.2758743491134821
+"B2-x (modes 4-5, x direction)",20-30,2,2,0.9313806308475693

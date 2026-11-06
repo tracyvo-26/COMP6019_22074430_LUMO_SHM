@@ -1,0 +1,6 @@
+input_file,sessions_in_file,mode,sessions_with_mode,reference_sessions,used_in_Phi,sessions_DAM3_010,sessions_DAM3_111,sessions_DAM4_010,sessions_DAM4_111,sessions_DAM6_010,sessions_DAM6_111,sessions_Healthy
+ssi_mode_shapes.csv,184,B1-y,154,54,True,18,18,22,19,28,15,64
+ssi_mode_shapes.csv,184,T1,63,49,True,18,18,22,19,28,15,64
+ssi_mode_shapes.csv,184,B2-y,133,44,True,18,18,22,19,28,15,64
+ssi_mode_shapes.csv,184,B2-x,130,50,True,18,18,22,19,28,15,64
+ssi_mode_shapes.csv,184,B1-x,154,53,True,18,18,22,19,28,15,64

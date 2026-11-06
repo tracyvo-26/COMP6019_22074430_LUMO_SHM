@@ -1,0 +1,100 @@
+input: ssi_modal_frequencies.csv
+186 sessions
+
+compensation: polynomial degree 1; window +-60 days around each class's recording window
+
+====================================================================================================
+1. TIMELINE
+====================================================================================================
+     cls  n      first       last  temp_min  temp_max
+ Healthy 64 2020-08-01 2021-07-28      -8.0      39.2
+DAM3_010 18 2021-06-26 2021-07-11       9.8      41.5
+DAM3_111 18 2021-03-19 2021-04-01      -4.8      32.2
+DAM4_010 23 2021-05-30 2021-06-09       3.6      42.9
+DAM4_111 19 2020-11-10 2020-11-23      -2.2      23.2
+DAM6_010 28 2021-05-05 2021-05-11      -1.1      35.4
+DAM6_111 16 2020-10-14 2020-10-24       2.2      25.8
+
+sessions per month (rows) and class (columns):
+col_0    DAM3_010  DAM3_111  DAM4_010  DAM4_111  DAM6_010  DAM6_111  Healthy
+row_0                                                                       
+2020-08         0         0         0         0         0         0        8
+2020-10         0         0         0         0         0        16        5
+2020-11         0         0         0        19         0         0        5
+2021-01         0         0         0         0         0         0        5
+2021-02         0         0         0         0         0         0        5
+2021-03         0         9         0         0         0         0        5
+2021-04         0         9         0         0         0         0        0
+2021-05         0         0         1         0        28         0       10
+2021-06         7         0        22         0         0         0        5
+2021-07        11         0         0         0         0         0       16
+
+====================================================================================================
+2. DO THE HEALTHY RESIDUALS DRIFT WITH TIME?  (Healthy sessions only)
+====================================================================================================
+feature  n  spearman_with_date      p  residual_sd_Hz
+  f_B1x 53              0.7117 0.0000          0.0144
+  f_B1y 54              0.5059 0.0001          0.0474
+  f_B2x 50              0.8112 0.0000          0.0430
+  f_B2y 44              0.8875 0.0000          0.0483
+
+median Healthy residual (Hz) per month  [n in brackets = sessions with f_B2y]:
+          f_B1x   f_B1y   f_B2x   f_B2y  n_B2y
+month                                         
+2020-08 -0.0156 -0.0125 -0.0813 -0.1089      5
+2020-10 -0.0097 -0.0271 -0.0436 -0.0258      5
+2020-11 -0.0033 -0.0147  0.0075  0.0087      4
+2021-01 -0.0064 -0.0501  0.0088  0.0049      3
+2021-02  0.0323  0.1352  0.0226     NaN      0
+2021-03 -0.0093 -0.0338 -0.0249 -0.0008      3
+2021-05 -0.0047 -0.0203  0.0107  0.0094      8
+2021-06  0.0021  0.0012  0.0205  0.0165      4
+2021-07  0.0102  0.0196  0.0511  0.0440     12
+
+====================================================================================================
+3. EACH DAMAGE CLASS AGAINST HEALTHY SESSIONS RECORDED WITHIN +-60 DAYS
+====================================================================================================
+
+DAM3_010: 16 damaged sessions; 31 Healthy sessions within +-60 days of its window; 22% of its sessions lie outside the Healthy temperature range
+feature  n_damage  n_healthy_near  diff_Hz  diff_percent  diff_in_healthy_sd  cliffs_delta      p  cliffs_delta_vs_all_healthy  p_vs_all_healthy
+  f_B1x        12              24  -0.0046       -0.1621             -0.3158       -0.2014 0.3389                       0.2673            0.1531
+  f_B1y        13              24  -0.0104       -0.3766             -0.2197       -0.2500 0.2206                       0.1681            0.3537
+  f_B2x        16              21   0.0273        0.1668              0.6343        0.3810 0.0516                       0.7150            0.0000
+  f_B2y        15              24   0.0195        0.1220              0.4039        0.3778 0.0513                       0.6606            0.0002
+
+DAM3_111: 17 damaged sessions; 20 Healthy sessions within +-60 days of its window; 0% of its sessions lie outside the Healthy temperature range
+feature  n_damage  n_healthy_near  diff_Hz  diff_percent  diff_in_healthy_sd  cliffs_delta      p  cliffs_delta_vs_all_healthy  p_vs_all_healthy
+  f_B1x        14              14  -0.0224       -0.7956             -1.5500       -0.8571 0.0001                      -0.9380            0.0000
+  f_B1y        15              16  -0.0114       -0.4121             -0.2404       -0.6250 0.0032                      -0.5309            0.0018
+  f_B2x        17              16   0.0317        0.1941              0.7380        0.6471 0.0016                       0.4941            0.0025
+  f_B2y        14              11   0.0371        0.2322              0.7688        1.0000 0.0000                       0.7565            0.0000
+
+DAM4_010: 20 damaged sessions; 31 Healthy sessions within +-60 days of its window; 4% of its sessions lie outside the Healthy temperature range
+feature  n_damage  n_healthy_near  diff_Hz  diff_percent  diff_in_healthy_sd  cliffs_delta      p  cliffs_delta_vs_all_healthy  p_vs_all_healthy
+  f_B1x        18              24  -0.0073       -0.2593             -0.5052       -0.2546 0.1660                       0.2264            0.1554
+  f_B1y        15              24  -0.0123       -0.4449             -0.2595       -0.2944 0.1296                       0.1481            0.3867
+  f_B2x        16              21   0.0229        0.1403              0.5336        0.5000 0.0105                       0.7875            0.0000
+  f_B2y        20              24  -0.0536       -0.3351             -1.1096       -1.0000 0.0000                      -0.6682            0.0000
+
+DAM4_111: 18 damaged sessions; 15 Healthy sessions within +-60 days of its window; 0% of its sessions lie outside the Healthy temperature range
+feature  n_damage  n_healthy_near  diff_Hz  diff_percent  diff_in_healthy_sd  cliffs_delta      p  cliffs_delta_vs_all_healthy  p_vs_all_healthy
+  f_B1x        16              14  -0.0167       -0.5958             -1.1607       -1.0000 0.0000                      -0.9623               0.0
+  f_B1y        18              15  -0.0138       -0.4999             -0.2916       -0.3704 0.0735                      -0.7840               0.0
+  f_B2x        14              14  -0.1365       -0.8350             -3.1754       -1.0000 0.0000                      -1.0000               0.0
+  f_B2y        17              12  -0.1127       -0.7055             -2.3359       -1.0000 0.0000                      -0.9118               0.0
+
+DAM6_010: 26 damaged sessions; 20 Healthy sessions within +-60 days of its window; 0% of its sessions lie outside the Healthy temperature range
+feature  n_damage  n_healthy_near  diff_Hz  diff_percent  diff_in_healthy_sd  cliffs_delta      p  cliffs_delta_vs_all_healthy  p_vs_all_healthy
+  f_B1x        26              13  -0.0020       -0.0700             -0.1364       -0.1775 0.3795                      -0.1785            0.2012
+  f_B1y        24              15  -0.0014       -0.0523             -0.0305       -0.3167 0.1029                      -0.4012            0.0050
+  f_B2x        17              16  -0.0026       -0.0161             -0.0611       -0.1838 0.3775                      -0.1059            0.5214
+  f_B2y        23              15  -0.4181       -2.6163             -8.6629       -1.0000 0.0000                      -1.0000            0.0000
+
+DAM6_111: 15 damaged sessions; 10 Healthy sessions within +-60 days of its window; 0% of its sessions lie outside the Healthy temperature range
+feature  n_damage  n_healthy_near  diff_Hz  diff_percent  diff_in_healthy_sd  cliffs_delta      p  cliffs_delta_vs_all_healthy  p_vs_all_healthy
+  f_B1x        15               9  -0.0316       -1.1257             -2.1931       -1.0000 0.0001                      -0.9748            0.0000
+  f_B1y        15              10  -0.0235       -0.8515             -0.4967       -0.3333 0.1741                      -0.5358            0.0016
+  f_B2x         0              10      NaN           NaN                 NaN           NaN    NaN                          NaN               NaN
+  f_B2y         0               9      NaN           NaN                 NaN           NaN    NaN                          NaN               NaN
+
+Saved time_matched_check.csv
